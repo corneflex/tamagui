@@ -38,7 +38,7 @@ Remove this log in next.config.js.
 const plugins = [
   withTamagui({
     config: './tamagui.config.ts',
-    components: ['tamagui', '@my/ui'],
+    components: ['tamagui', '@corneflex/ui'],
     importsWhitelist: ['constants.js', 'colors.js'],
     outputCSS: process.env.NODE_ENV === 'production' ? './public/tamagui.css' : null,
     logTimings: true,
@@ -72,6 +72,7 @@ module.exports = function () {
       'expo-linking',
       'expo-constants',
       'expo-modules-core',
+      'expo-localization',
     ],
     experimental: {
       /*
@@ -86,6 +87,14 @@ module.exports = function () {
       // optimizeCss: true,
       scrollRestoration: true,
       legacyBrowsers: false,
+    },
+    webpack: (config) => {
+      config.module.rules.push({
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
+      })
+      return config
     },
   }
 
