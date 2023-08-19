@@ -8,6 +8,7 @@ import { ProductDetail } from './ProductDetail'
 import { productMapper } from './product.mapper'
 import { ProductCard } from './ProductCard'
 import { ScrollView } from 'react-native'
+import { useProduct } from './hooks/useProduct'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -18,11 +19,7 @@ export const ProductDetailScreen = () => {
   })
 
   const { push, replace, back, parseNextPath } = useRouter()
-
-  const { data, error, isLoading } = useSWR(
-    `https://world.openfoodfacts.org/api/v2/product/${id}`,
-    fetcher
-  )
+  const { product, error, isLoading } = useProduct(id)
 
   if (isLoading)
     return (
@@ -31,7 +28,6 @@ export const ProductDetailScreen = () => {
       </YStack>
     )
   if (error) return <Text>Error</Text>
-  const product = productMapper(data?.product)
 
   return (
     <YStack f={1} jc="center" ai="center">

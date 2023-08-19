@@ -1,10 +1,13 @@
 import { fetcher } from '@corneflex/compose-core'
 import useSWR from 'swr'
-import { productMapper } from '../product.mapper'
+import { getFields, productMapper } from '../product.mapper'
+import { getLocales } from 'expo-localization'
 
 export const useProducts = () => {
-  const f = (url) => fetcher(url).then((data) => data?.products?.map(productMapper))
-  const { data, error, isLoading } = useSWR('https://world.openfoodfacts.org?json=true', f)
+  const locale = getLocales()?.[0]?.languageCode ?? ''
+  const f = (url) => fetcher(url).then((data) => data?.products?.map(item=>productMapper(item,locale)))
+  const fields = Object.values(getFields(locale)).join(',')
+  const { data, error, isLoading } = useSWR(`https://world.openfoodfacts.org?json=true&fields=${fields}`, f)
 
   return { products: data, isLoading, error }
 }

@@ -1,12 +1,10 @@
 'use client'
 import { Stack } from '@corneflex/ui'
 import { Product } from 'app/model/Product'
-import { useEffect, useRef, useState } from 'react'
 import Masonry from 'react-masonry-css'
 import { ProductCard } from './ProductCard'
 import styles from './Products.module.css'
-import { preload } from 'swr'
-import { fetcher } from '@corneflex/compose-core'
+import { useDimensions } from '../../hooks/system/use-dimensions'
 
 export interface ProductProps {
   products: Product[]
@@ -14,26 +12,11 @@ export interface ProductProps {
 }
 
 export const Products: React.FC<ProductProps> = ({ products, preload = () => {} }) => {
-  const [width, setWidth] = useState(0)
-  const [columns, setColumns] = useState(0)
-  const elementRef = useRef(null)
-
-  const compute = () => {
-    setWidth(elementRef?.current?.offsetWidth ?? 0)
-    setColumns(Math.max(Math.floor(elementRef?.current?.offsetWidth / 350), 1))
-  }
-  useEffect(() => {
-    compute()
-    function handleResize() {
-      compute()
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  const dimensions = useDimensions()
+  const columns = Math.max(Math.floor(dimensions.window.width / 350), 1)
 
   return (
-    <Stack ref={elementRef} flex={1} width="100%" ai="center" jc={'center'} maxWidth={1400}>
+    <Stack flex={1} width="100%" ai="center" jc={'center'} maxWidth={1400}>
       {columns > 0 ? (
         <Masonry
           breakpointCols={columns}

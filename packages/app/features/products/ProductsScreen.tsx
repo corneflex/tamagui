@@ -1,11 +1,10 @@
-import { Text, Button, Paragraph, Theme, YStack, Stack } from '@corneflex/ui'
+import { fetcher } from '@corneflex/compose-core'
+import { Button, Text, YStack } from '@corneflex/ui'
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import React from 'react'
 import { useLink } from 'solito/link'
+import { preload } from 'swr'
 import { Products } from './Products'
-import { productMapper } from './product.mapper'
-import useSWR, { preload } from 'swr'
-import { fetcher } from '@corneflex/compose-core'
 import { useProducts } from './hooks/useProducts'
 
 export function ProductsScreen() {
