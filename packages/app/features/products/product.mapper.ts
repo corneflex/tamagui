@@ -1,43 +1,47 @@
 import { Product } from 'app/model/Product'
-import { getLocales } from 'expo-localization'
+import get from 'lodash.get'
 
-export const getFields = (deviceLanguage) => ({
+export const mapping = {
   id: 'id',
-  productName: `product_name_${deviceLanguage}`,
-  description: `generic_name_${deviceLanguage}`,
-  images: 'images',
-  selectedImages: 'selected_images',
+  name: 'product_name_${locale}',
+  brands: 'brands',
+  description: 'generic_name_${locale}',
+  image: {
+    width: 'images.front_${locale}.sizes.["400"].w',
+    height: 'images.front_${locale}.sizes.["400"].h',
+    url: 'selected_images.front.display.${locale}',
+  },
   nutriscore: 'nutriscore_grade',
   ecoscore: 'ecoscore_grade',
   novaGroup: 'nova_group',
-  frontImage: `front_${deviceLanguage}`,
-  genericName: 'generic_name'
-})
+}
 
-export const productMapper = (product: any, languageCode: string): Product => {
-  const fields = getFields(languageCode)
+export const getFieldsMap = (mapping) => {
+  return Object.values(mapping).flatMap((val) => {
+    if (typeof val === 'string') {
+      return val.split('.')[0]
+    } else {
+      return getFieldsMap(val)
+    }
+  })
+}
 
-  const productName = !!product?.[fields.productName]
-    ? product?.[fields.productName]
-    : product.product_name
-  const genericName = !!product?.[fields.description]
-    ? product?.[fields.description]
-    : product.generic_name
-  const size = product.images[fields.frontImage]?.sizes['400']
-  const image = {
-    url: product.selected_images.front.display[languageCode],
-    width: size?.w ?? 0,
-    height: size?.h ?? 0,
-  }
+const toObj = (mapping: { [key: string]: string | any }, obj: Object, json, locale: string) => {
+  Object.entries(mapping).forEach(([key, value]) => {
+    if (typeof value === 'string') {
+      obj[key] =
+        get(json, value.replace('${locale}', locale)) ?? get(json, value.replace('${locale}', 'en'))
+    } else {
+      obj[key] = toObj(value, {}, json, locale)
+    }
+  })
+  return obj
+}
 
-  return new Product(
-    product.id,
-    productName,
-    product.brands,
-    genericName,
-    image,
-    product.nutriscore_grade,
-    product.ecoscore_grade,
-    product.nova_group
-  )
+export const getFields = (locale: string) => {
+  return getFieldsMap(mapping).join(',').replaceAll('${locale}', locale)
+}
+
+export const productMapper = (product: any, locale: string): Product => {
+  return new Product(toObj(mapping, {}, product, locale))
 }

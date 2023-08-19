@@ -1,18 +1,30 @@
-import { fetcher } from '@corneflex/compose-core'
-import useSWR from 'swr'
-import { getFields, productMapper } from '../product.mapper'
-import { getLocales } from 'expo-localization'
+import { openFoodFetcher } from 'app/api/api'
 import { Product } from 'app/model/Product'
+import { getLocales } from 'expo-localization'
+import useSWR, { preload } from 'swr'
+import { getFields, productMapper } from '../product.mapper'
+import { Loading } from './loading.interface'
 
-export const useProduct = (id: string | undefined) => {
-  const locale = getLocales()?.[0]?.languageCode ?? ''
+const constructUrl = (id, locale) => `/product/${id}?fields=${getFields(locale)}`
 
-  const fetchProduct = (url) => fetcher(url).then((data) => productMapper(data?.product, locale))
-  
-  const fields = Object.values(getFields(locale)).join(',')
-  const url = `https://world.openfoodfacts.org/api/v2/product/${id}?fields=${fields}`
+const computeParams = (id: string | undefined) => {
+  const locale = getLocales()?.[0]?.languageCode ?? 'en'
 
-  const { data, error, isLoading } = useSWR(id ? url : null, fetchProduct)
+  const fetchProduct = (url) =>
+    openFoodFetcher(url).then((data) => productMapper(data?.product, locale))
+  return { url: id ? constructUrl(id, locale) : null, fetch: fetchProduct }
+}
 
-  return { product: data as Product, isLoading, error }
+export const useProduct = (id: string | undefined): Loading<Product | undefined> => {
+  const { url, fetch } = computeParams(id)
+  const { data, error, isLoading } = useSWR<Product>(url, fetch, {
+    revalidateOnFocus: true,
+    revalidateIfStale: false,
+  })
+  return { data, isLoading, error }
+}
+
+export const preloadProduct = (id: string | undefined): Promise<Product> => {
+  const { url, fetch } = computeParams(id)
+  return preload(url, fetch)
 }

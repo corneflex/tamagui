@@ -1,13 +1,29 @@
-import { fetcher } from '@corneflex/compose-core'
+import { openFoodFetcher } from 'app/api/api'
+import { getLocales } from 'expo-localization'
 import useSWR from 'swr'
 import { getFields, productMapper } from '../product.mapper'
-import { getLocales } from 'expo-localization'
+import { Product } from 'app/model/Product'
+import { Loading } from './loading.interface'
 
-export const useProducts = () => {
+export interface ProductsLoading {
+  roducts: Product[]
+  isLoading: boolean
+  error: any
+}
+
+const getKey = (pageIndex, previousPageData) => {
+  if (previousPageData && !previousPageData.length) return null // reached the end
+  return `/users?page=${pageIndex}&limit=10`                    // SWR key
+}
+
+export const useProducts = (): Loading<Product[]> => {
   const locale = getLocales()?.[0]?.languageCode ?? ''
-  const f = (url) => fetcher(url).then((data) => data?.products?.map(item=>productMapper(item,locale)))
-  const fields = Object.values(getFields(locale)).join(',')
-  const { data, error, isLoading } = useSWR(`https://world.openfoodfacts.org?json=true&fields=${fields}`, f)
+  const f = (url) =>
+    openFoodFetcher(url).then((data) => data?.products?.map((item) => productMapper(item, locale)))
+  const { data, error, isLoading } = useSWR(`/search?fields=${getFields(locale)}`, f, {
+    revalidateOnFocus: true,
+    revalidateIfStale: false,
+  })
 
-  return { products: data, isLoading, error }
+  return { data, isLoading, error }
 }
