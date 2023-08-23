@@ -1,29 +1,23 @@
 import { openFoodFetcher } from 'app/api/api'
-import { getLocales } from 'expo-localization'
-import useSWR from 'swr'
-import { getFields, productMapper } from '../product.mapper'
 import { Product } from 'app/model/Product'
-import { Loading } from './loading.interface'
-
-export interface ProductsLoading {
-  roducts: Product[]
-  isLoading: boolean
-  error: any
-}
+import { getLocales } from 'expo-localization'
+import useSWRInfinite, { SWRInfiniteResponse } from 'swr/infinite'
+import { getFields, productMapper } from '../product.mapper'
 
 const getKey = (pageIndex, previousPageData) => {
+  const locale = getLocales()?.[0]?.languageCode ?? ''
   if (previousPageData && !previousPageData.length) return null // reached the end
-  return `/users?page=${pageIndex}&limit=10`                    // SWR key
+  return `/search?page=${pageIndex + 1}&fields=${getFields(locale)}` // SWR key
 }
 
-export const useProducts = (): Loading<Product[]> => {
+export const useProducts = (): SWRInfiniteResponse<Product> => {
   const locale = getLocales()?.[0]?.languageCode ?? ''
   const f = (url) =>
     openFoodFetcher(url).then((data) => data?.products?.map((item) => productMapper(item, locale)))
-  const { data, error, isLoading } = useSWR(`/search?fields=${getFields(locale)}`, f, {
-    revalidateOnFocus: true,
+  const { data, ...res } = useSWRInfinite(getKey, f, {
+    revalidateOnFocus: false,
     revalidateIfStale: false,
   })
 
-  return { data, isLoading, error }
+  return { ...res, data: data?.flat() }
 }

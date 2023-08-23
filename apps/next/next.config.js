@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const { withTamagui } = require('@tamagui/next-plugin')
-const { join } = require('path')
+const { resolve, join } = require('path')
 
 const boolVals = {
   true: true,
@@ -73,6 +73,8 @@ module.exports = function () {
       'expo-constants',
       'expo-modules-core',
       'expo-localization',
+      'react-native-svg-web',
+      '@react-spring/web',
     ],
     experimental: {
       /*
@@ -94,6 +96,11 @@ module.exports = function () {
         issuer: /\.[jt]sx?$/,
         use: ['@svgr/webpack'],
       })
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        'react-native-svg': 'react-native-svg-web',
+      }
+      console.log(config.resolve.alias)
       return config
     },
   }

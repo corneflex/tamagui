@@ -5,7 +5,7 @@ import useSWR, { preload } from 'swr'
 import { getFields, productMapper } from '../product.mapper'
 import { Loading } from './loading.interface'
 
-const constructUrl = (id, locale) => `/product/${id}?fields=${getFields(locale)}`
+const constructUrl = (id, locale) => `/product/${id}`
 
 const computeParams = (id: string | undefined) => {
   const locale = getLocales()?.[0]?.languageCode ?? 'en'

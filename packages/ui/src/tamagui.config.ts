@@ -1,7 +1,7 @@
-import { createTamagui } from 'tamagui'
+import { createTamagui, createTokens } from 'tamagui'
 import { createInterFont } from '@tamagui/font-inter'
 import { shorthands } from '@tamagui/shorthands'
-import { themes, tokens } from '@tamagui/themes'
+import { color, themes, radius, zIndex, space, size } from '@tamagui/themes'
 import { createMedia } from '@tamagui/react-native-media-driver'
 
 import { animations } from './animations'
@@ -49,6 +49,28 @@ const bodyFont = createInterFont(
     sizeLineHeight: (size) => Math.round(size * 1.1 + (size > 20 ? 10 : 10)),
   }
 )
+
+export const tokens = createTokens({
+  color: {
+    ...color,
+    NutriA: '#26803D',
+    NutriB: '#87BD25',
+    NutriC: '#F6CC03',
+    NutriD: '#EF7D01',
+    NutriE: '#E63313',
+  },
+  radius,
+  zIndex,
+  space,
+  size,
+
+  // testing
+  icon: {
+    sm: 16,
+    md: 24,
+    lg: 32,
+  },
+})
 
 export const config = createTamagui({
   defaultFont: 'body',

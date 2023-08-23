@@ -1,8 +1,7 @@
-import { Card, H3, Paragraph, Stack, XStack, YStack } from '@corneflex/ui'
+import { Card, H3, Paragraph, Stack, XStack, YStack, Image, Text } from '@corneflex/ui'
 import { Link } from 'solito/link'
 import { Product } from 'app/model/Product'
 import React from 'react'
-import { Image, Text } from 'tamagui'
 import { Images } from '../../images'
 
 export interface ProductCardProps {
@@ -24,13 +23,13 @@ export const ProductCard: React.FC<any> = ({
   const NutriScore = Images.nutriscore[product?.nutriscore ?? ''] ?? null
   const EcoScore = Images.ecoscore[product?.ecoscore ?? ''] ?? null
   const Nova = Images.nova[product?.novaGroup ?? ''] ?? null
-  const LNK = ({ children }) => (href ? <Link href={href}>{children}</Link> : <>{children}</>)
-  const imageWidth = product.image?.width * 0.4 ?? 200
-  const imageHeight = product.image?.height * 0.4 ?? 200
+  const thumb = product?.image?.thumb
+  const imageWidth = thumb?.width ?? 200
+  const imageHeight = thumb?.height ?? 200
 
   if (!product) return null
   return (
-    <LNK>
+    <Link href={href}>
       <Card
         elevate
         size="$2"
@@ -46,14 +45,14 @@ export const ProductCard: React.FC<any> = ({
       >
         <Card.Header padded flex={1} jc="center">
           <XStack width={'100%'} flex={1} space>
-            <Stack jc="center" ai="center" height={'100%'} minWidth={imageWidth}>
+            <Stack jc="center" ai="center" height={'100%'} minWidth={imageWidth + 20}>
               {
                 <Image
                   margin="$2"
                   borderRadius={10}
                   overflow="hidden"
                   source={{
-                    uri: product.image?.url,
+                    uri: thumb?.url,
                     width: imageWidth,
                     height: imageHeight,
                   }}
@@ -81,6 +80,6 @@ export const ProductCard: React.FC<any> = ({
           </Paragraph>
         </Card.Header>
       </Card>
-    </LNK>
+    </Link>
   )
 }

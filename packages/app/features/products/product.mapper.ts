@@ -7,13 +7,29 @@ export const mapping = {
   brands: 'brands',
   description: 'generic_name_${locale}',
   image: {
-    width: 'images.front_${locale}.sizes.["400"].w',
-    height: 'images.front_${locale}.sizes.["400"].h',
-    url: 'selected_images.front.display.${locale}',
+    thumb: {
+      width: 'images.front_${locale}.sizes.["100"].w',
+      height: 'images.front_${locale}.sizes.["100"].h',
+      url: 'selected_images.front.small.${locale}',
+    },
+    small: {
+      width: 'images.front_${locale}.sizes.["200"].w',
+      height: 'images.front_${locale}.sizes.["200"].h',
+      url: 'selected_images.front.small.${locale}',
+    },
+    cover: {
+      width: 'images.front_${locale}.sizes.["400"].w',
+      height: 'images.front_${locale}.sizes.["400"].h',
+      url: 'selected_images.front.display.${locale}',
+    },
   },
   nutriscore: 'nutriscore_grade',
   ecoscore: 'ecoscore_grade',
   novaGroup: 'nova_group',
+  protein: 'nutriments.proteins',
+  sugar: 'nutriments.sugars',
+  fat: 'nutriments.fat',
+  saturedFat: 'nutriments.saturated-fat',
 }
 
 export const getFieldsMap = (mapping) => {
@@ -29,8 +45,10 @@ export const getFieldsMap = (mapping) => {
 const toObj = (mapping: { [key: string]: string | any }, obj: Object, json, locale: string) => {
   Object.entries(mapping).forEach(([key, value]) => {
     if (typeof value === 'string') {
-      obj[key] =
-        get(json, value.replace('${locale}', locale)) ?? get(json, value.replace('${locale}', 'en'))
+      for (const l of [locale, 'en', 'es', 'pt', 'it', 'de', 'da', 'cs', 'sr']) {
+        obj[key] = get(json, value.replace('${locale}', l))
+        if (obj[key]) break
+      }
     } else {
       obj[key] = toObj(value, {}, json, locale)
     }

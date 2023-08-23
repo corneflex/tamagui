@@ -3430,6 +3430,79 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-spring/animated@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/animated@npm:9.7.3"
+  dependencies:
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 468942ca3a11c02c3e56def26b2da9dd10ddbed548004245c4ac309cce00b58d971e781abed67db0d652f72737eaa73766ea9a43b8ef3b08a7ed2eddc04d4c39
+  languageName: node
+  linkType: hard
+
+"@react-spring/core@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/core@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 8a80a07276458fd14099320eda824e58a11ce3a9b03a5c9cd3f4252adb4d26da04ee5caf5cbc961199f55c2d58a99638d5ea292cdb6aa029208dbab741b5c531
+  languageName: node
+  linkType: hard
+
+"@react-spring/native@npm:^9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/native@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/core": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0  || >=17.0.0 || >=18.0.0
+    react-native: ">=0.58"
+  checksum: 8635153a696310c661a5a1d16ed57fbcd1941c230344a03fa4115e033c487f67049e7659248e3eac11d24ef407a929a8683afa5be4cc05821568b9e417c67032
+  languageName: node
+  linkType: hard
+
+"@react-spring/shared@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/shared@npm:9.7.3"
+  dependencies:
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 912b5e567eb5345c9a6c8e8c0c2d69b1f411af72a0685b95831809c267c89846a31341ca071f284ace98b3cb5de647054dc76f6ace81d6379513eaf96b52f195
+  languageName: node
+  linkType: hard
+
+"@react-spring/types@npm:~9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/types@npm:9.7.3"
+  checksum: f47b81fe556464aa54a78603311cb584d6a0f03088522229afb058265bbe2ade2095a55ec7f4e960c3b9cceaa5d47865bc41fc6643c0f5f4bd3d8650203d8389
+  languageName: node
+  linkType: hard
+
+"@react-spring/web@npm:^9.7.3":
+  version: 9.7.3
+  resolution: "@react-spring/web@npm:9.7.3"
+  dependencies:
+    "@react-spring/animated": ~9.7.3
+    "@react-spring/core": ~9.7.3
+    "@react-spring/shared": ~9.7.3
+    "@react-spring/types": ~9.7.3
+  peerDependencies:
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 7f5cd05b2314b7f2f715e1926abcf9aa0a539399b222ab34e989144f48350adfcd2edab65d41425570f72c57f602fc6994d6730fbeed902171ac527b630a8a9b
+  languageName: node
+  linkType: hard
+
 "@rollup/pluginutils@npm:^4.0.0":
   version: 4.2.1
   resolution: "@rollup/pluginutils@npm:4.2.1"
@@ -5873,6 +5946,8 @@ __metadata:
   dependencies:
     "@corneflex/compose-core": 1.0.0
     "@corneflex/ui": 0.0.1
+    "@react-spring/native": ^9.7.3
+    "@react-spring/web": ^9.7.3
     "@tamagui/animations-react-native": latest
     "@tamagui/colors": latest
     "@tamagui/font-inter": latest
@@ -5884,14 +5959,16 @@ __metadata:
     "@types/react-native": ^0.71.3
     burnt: ^0.10.0
     expo-constants: ~14.4.2
-    expo-linear-gradient: ^12.3.0
     expo-linking: ~5.0.2
     expo-localization: ^14.3.0
+    lodash.debounce: ^4.0.8
     lodash.get: ^4.4.2
+    react-lazyload: ^3.2.0
     react-masonry-css: ^1.0.16
     react-native-image-colors: ^2.3.0
     react-native-safe-area-context: 4.6.3
     react-native-svg-uri: ^1.2.3
+    react-native-svg-web: ^1.0.9
     solito: ^3.0.0
     swr: ^2.2.1
   languageName: unknown
@@ -8852,6 +8929,7 @@ __metadata:
     "@corneflex/ui": 0.0.1
     "@expo/metro-config": ^0.10.7
     "@react-navigation/native": ^6.1.6
+    "@react-spring/native": ^9.7.3
     "@tamagui/babel-plugin": latest
     app: 0.0.0
     babel-plugin-module-resolver: ^4.1.0
@@ -8862,9 +8940,8 @@ __metadata:
     expo-constants: ~14.4.2
     expo-dev-client: ~2.4.6
     expo-font: ~11.4.0
-    expo-linear-gradient: ~12.3.0
     expo-linking: ~5.0.2
-    expo-localization: ~14.3.0
+    expo-localization: ^14.3.0
     expo-router: 2.0.0
     expo-splash-screen: ~0.20.5
     expo-status-bar: ~1.6.0
@@ -8876,7 +8953,7 @@ __metadata:
     react-native-gesture-handler: ~2.12.0
     react-native-safe-area-context: 4.6.3
     react-native-screens: ~3.22.0
-    react-native-svg: ^13.11.0
+    react-native-svg: 13.4.0
     react-native-svg-transformer: ^1.1.0
     typescript: ^5.1.3
   languageName: unknown
@@ -9038,24 +9115,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-linear-gradient@npm:^12.3.0":
-  version: 12.4.0
-  resolution: "expo-linear-gradient@npm:12.4.0"
-  peerDependencies:
-    expo: "*"
-  checksum: 23af7dd46b67c7341da55e76efeeae80d8836df1056503c2eaff80ef03f0080a8171e755c23e34b55bd17f13d5d83faccec69ddc509e6e2e621851d2073895ab
-  languageName: node
-  linkType: hard
-
-"expo-linear-gradient@npm:~12.3.0":
-  version: 12.3.0
-  resolution: "expo-linear-gradient@npm:12.3.0"
-  peerDependencies:
-    expo: "*"
-  checksum: 24b1cc7c11d61fd54d0093fae7ff4fc88b4ec928f1a5d998c1418456e9bf8845978361e33fe0bc7ae2d586e289548adfa709eef498c4bdc2e11c64674a6ba075
-  languageName: node
-  linkType: hard
-
 "expo-linking@npm:~5.0.2":
   version: 5.0.2
   resolution: "expo-linking@npm:5.0.2"
@@ -9077,17 +9136,6 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: 4f1a9da6728851d82ee0a1e1eecac39565bf78752fca63eb2e11e56761470a3b8e65137f99879a2fc23ff9ac7ec84a1117a5255c71e6e801c1d7c941cfcfa530
-  languageName: node
-  linkType: hard
-
-"expo-localization@npm:~14.3.0":
-  version: 14.3.0
-  resolution: "expo-localization@npm:14.3.0"
-  dependencies:
-    rtl-detect: ^1.0.2
-  peerDependencies:
-    expo: "*"
-  checksum: 0e1f72156a17c8a14e500e13f4025b820f28575c671b2cc34e4af5470584e990212e1ce12aba79bb38a501b02c7e8c220ee3b6974566f145586f5fe6aef4ce42
   languageName: node
   linkType: hard
 
@@ -12597,6 +12645,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "next-app@workspace:apps/next"
   dependencies:
+    "@react-spring/web": ^9.7.3
     "@svgr/webpack": ^8.1.0
     "@tamagui/next-plugin": latest
     "@tamagui/next-theme": latest
@@ -12622,8 +12671,10 @@ __metadata:
     "@manypkg/cli": ^0.19.1
     check-dependency-version-consistency: ^3.0.3
     eslint: ^8.21.0
+    lodash.debounce: ^4.0.8
     node-gyp: ^9.3.1
     prettier: ^2.7.1
+    react-native-svg-web: ^1.0.9
     turbo: ^1.10.3
     typescript: ^5.1.3
   languageName: unknown
@@ -14093,6 +14144,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-lazyload@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-lazyload@npm:3.2.0"
+  peerDependencies:
+    react: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+    react-dom: ^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
+  checksum: 871a88c698a80c53ead85c293b493ac67c94e5980590094128c371e3f1e3d5bc17841ead1e7830771c87ece7fe677a6c9c323f3e6ce392a5f6f0328a36c38fe7
+  languageName: node
+  linkType: hard
+
 "react-masonry-css@npm:^1.0.16":
   version: 1.0.16
   resolution: "react-masonry-css@npm:1.0.16"
@@ -14177,6 +14238,17 @@ __metadata:
   peerDependencies:
     react-native-svg: ^5.3.0
   checksum: e82311633783303be339389bafc3a44423645c6a80e8f7d667c4b0cc4f5f660943d08d43f710d899bbaf4d581cf0fcd7dc2db7139baf77165a1d53feef9a7a7a
+  languageName: node
+  linkType: hard
+
+"react-native-svg-web@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "react-native-svg-web@npm:1.0.9"
+  peerDependencies:
+    prop-types: "*"
+    react: "*"
+    react-native-web: ">= 0.10.1"
+  checksum: fb217afb275a3e06f8c4e5e79d6099cdabb16fa294cd7611bc4cdbbc3ffcaa6c848cdb23dbe7673d11ab57a635c82a0f752a627fbc183f4884c255346f1c53e5
   languageName: node
   linkType: hard
 

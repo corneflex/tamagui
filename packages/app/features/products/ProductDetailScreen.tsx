@@ -1,9 +1,7 @@
-import { ScrollView } from 'react-native'
 import { createParam } from 'solito/build'
 import { useLink } from 'solito/link'
-import { useRouter } from 'solito/router'
-import { Text, YStack } from 'tamagui'
-import { ProductCard } from './ProductCard'
+import { Text, YStack } from '@corneflex/ui'
+import { ProductDetail } from './ProductDetail'
 import { useProduct } from './hooks/useProduct'
 
 const { useParam } = createParam<{ id: string }>()
@@ -14,7 +12,6 @@ export const ProductDetailScreen = () => {
     href: '/',
   })
 
-  const { back } = useRouter()
   const { data: product, error, isLoading } = useProduct(id)
 
   if (isLoading)
@@ -26,10 +23,8 @@ export const ProductDetailScreen = () => {
   if (error) return <Text>Error</Text>
 
   return (
-    <YStack f={1} jc="center" ai="center">
-      <ScrollView>
-        <ProductCard product={product}></ProductCard>
-      </ScrollView>
+    <YStack f={1}>
+      <ProductDetail product={product}></ProductDetail>
     </YStack>
   )
 }
