@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { useSpring, animated, InterpolatorArgs, InterpolatorConfig } from '../react-spring'
-import Svg, { Path, Text } from 'react-native-svg'
-import { NutriColors } from 'app/colors/nutriscore'
+import Svg, { Path, Text, Line } from 'react-native-svg'
 
 type validateValueType = (v: number, min?: number, max?: number) => number
 
@@ -97,6 +96,7 @@ export const GaugeSVG: React.FC<GaugeSVGProps> = ({
   })
 
   const AnimatedPath = animated(Path)
+
   const AnimatedText = animated(Text)
 
   const gaugeColorAnim = animatedGaugeColor

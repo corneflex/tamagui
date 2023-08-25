@@ -1,8 +1,8 @@
-import { Card, H3, Paragraph, Stack, XStack, YStack, Image, Text } from '@corneflex/ui'
-import { Link } from 'solito/link'
+import { Card, H3, Image, Paragraph, Stack, Text, XStack, YStack } from '@corneflex/ui'
 import { Product } from 'app/model/Product'
 import React from 'react'
-import { Images } from '../../images'
+import { Link } from 'solito/link'
+import { EcoScore, NovaGroup, NutriScore } from './scores'
 
 export interface ProductCardProps {
   width?: string | number
@@ -14,15 +14,12 @@ export interface ProductCardProps {
 
 export const ProductCard: React.FC<any> = ({
   width = 350,
-  height = 300,
+  height = 200,
   product,
   href,
   ...props
 }) => {
   // const colors = useImageColors(product?.selected_images?.front.display.fr)
-  const NutriScore = Images.nutriscore[product?.nutriscore ?? ''] ?? null
-  const EcoScore = Images.ecoscore[product?.ecoscore ?? ''] ?? null
-  const Nova = Images.nova[product?.novaGroup ?? ''] ?? null
   const thumb = product?.image?.thumb
   const imageWidth = thumb?.width ?? 200
   const imageHeight = thumb?.height ?? 200
@@ -60,22 +57,22 @@ export const ProductCard: React.FC<any> = ({
               }
             </Stack>
             <YStack f={1} width={'100%'}>
-              <XStack width={'100%'} height={50} jc="flex-end" space={5} ai="center">
-                {NutriScore && <NutriScore width={70} height={'100%'}></NutriScore>}
-                {EcoScore && <EcoScore width={60} height={'100%'}></EcoScore>}
-                {Nova && <Nova width={15} height={'100%'}></Nova>}
+              <XStack space="$1" jc="flex-end">
+                <NutriScore size={70} value={product?.nutriscore}></NutriScore>
+                <EcoScore size={70} value={product?.ecoscore}></EcoScore>
+                <NovaGroup size={70} value={product?.novaGroup}></NovaGroup>
               </XStack>
               <XStack flex={1} space flexWrap="wrap" jc="center" ai="center">
                 <YStack f={1}>
                   <Stack maxWidth={250}>
-                    <H3 numberOfLines={4}>{product.name}</H3>
+                    <H3 numberOfLines={2}>{product.name}</H3>
                     <Text theme="alt1">{product.brands}</Text>
                   </Stack>
                 </YStack>
               </XStack>
             </YStack>
           </XStack>
-          <Paragraph mt="$3" size={'$2'}>
+          <Paragraph size={'$2'} minHeight={35}>
             {product.description}
           </Paragraph>
         </Card.Header>

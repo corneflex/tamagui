@@ -1,35 +1,32 @@
-import { Card, H3, H4, Image, ScrollView, XStack, YStack, Stack, useMedia } from '@corneflex/ui'
-import { Animated } from 'react-native'
-import { Images } from '../../images'
-import { Product } from '../../model/Product'
-import { NutrimentsGauges } from './gauges/NutrimentsGauges'
-import { Header } from '../../components/header/Header'
+import { Card, Stack, XStack, YStack, useMedia } from '@corneflex/ui'
+import { Header } from '../../../components/header/Header'
+import { Images } from '../../../images'
+import { Product } from '../../../model/Product'
+import { NutrimentsGauges } from '../NutrimentGauges/NutrimentsGauges'
 
 export interface ProductDetailProps {
   product?: Product
 }
 
 export const ProductDetail = ({ product }: ProductDetailProps) => {
-  const fatValue = new Animated.Value(0)
-
   const NutriScore = Images.nutriscore[product?.nutriscore ?? ''] ?? null
   const EcoScore = Images.ecoscore[product?.ecoscore ?? ''] ?? null
   const Nova = Images.nova[product?.novaGroup ?? ''] ?? null
-
   const media = useMedia()
-  const cover = media.sm ? product?.image?.small : product?.image?.cover
 
   if (!product) return null
 
-  const nutriments = [
-    {
-      name: 'protein',
-      range: [0, 15, 20, 16],
-    },
-  ]
-
   return (
-    <ScrollView>
+    <Stack f={1}>
+      {media.md && (
+        <Header
+          width={'100%'}
+          jc="center"
+          image={product?.image?.small}
+          title={product.name}
+          subtitle={product.brands}
+        ></Header>
+      )}
       <Card overflow="hidden" margin="$4">
         <Card.Header f={1}>
           <Stack
@@ -40,8 +37,13 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
             $gtSm={{ flexDirection: 'row' }}
             $gtMd={{ flexDirection: 'row' }}
           >
-            <Header image={cover} title={product.name} subtitle={product.brands}></Header>
-
+            {media.gtMd && (
+              <Header
+                image={product?.image?.cover}
+                title={product.name}
+                subtitle={product.brands}
+              ></Header>
+            )}
             <YStack f={1} ai="center" jc="center" overflow="hidden">
               <YStack>
                 <YStack>
@@ -64,6 +66,7 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
           </Stack>
         </Card.Header>
       </Card>
-    </ScrollView>
+      <Stack height={1000}></Stack>
+    </Stack>
   )
 }

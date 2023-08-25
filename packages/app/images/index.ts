@@ -12,8 +12,13 @@ import Nova1 from './nova-group-1.svg'
 import Nova2 from './nova-group-2.svg'
 import Nova3 from './nova-group-3.svg'
 import Nova4 from './nova-group-4.svg'
+import { EcoScoreType, NovaGroupType, NutriScoreType } from 'app/model/Product'
 
-export const Images = {
+export const Images: {
+  nutriscore: { [k in NutriScoreType]: React.ReactNode }
+  ecoscore: { [k in EcoScoreType]: React.ReactNode }
+  nova: { [k in NovaGroupType]: React.ReactNode }
+} = {
   nutriscore: {
     a: NutriScoreA,
     b: NutriScoreB,

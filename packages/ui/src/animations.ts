@@ -1,6 +1,6 @@
-import { createAnimations } from '@tamagui/animations-react-native'
+import { createAnimations } from '@tamagui/animations-moti'
 
-export const animations = createAnimations({
+export const animations: any = createAnimations({
   bouncy: {
     type: 'spring',
     damping: 10,
