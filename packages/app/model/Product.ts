@@ -9,7 +9,7 @@ export class Product {
   readonly name: string
   readonly brands?: string
   readonly description?: string
-  readonly image?: { thumb: Image; cover: Image; small: Image }
+  readonly image: { thumb: Image; cover: Image; small: Image }
   readonly nutriscore?: NutriScoreType
   readonly ecoscore?: EcoScoreType
   readonly novaGroup?: NovaGroupType

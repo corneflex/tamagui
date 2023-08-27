@@ -3,7 +3,7 @@
 import '@tamagui/core/reset.css'
 import '@tamagui/polyfill-dev'
 
-import { config as configBase } from '@tamagui/config'
+import { config } from '@corneflex/ui'
 import { NextThemeProvider, useRootTheme } from '@tamagui/next-theme'
 import { useServerInsertedHTML } from 'next/navigation'
 import React from 'react'
@@ -11,11 +11,6 @@ import { StyleSheet } from 'react-native'
 import { createTamagui, TamaguiProvider as TamaguiProviderOG } from 'tamagui'
 
 import Tamagui from '../tamagui.config'
-
-const config = createTamagui({
-  ...configBase,
-  themeClassNameOnRoot: false,
-})
 
 export type Conf = typeof config
 

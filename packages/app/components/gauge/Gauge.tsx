@@ -11,6 +11,7 @@ export const validateValue: validateValueType = (value, min = 0, max = 100) => {
 
 interface GaugeSVGProps {
   value: number
+  fillColor?: string
   gaugeColor?: string
   gaugeValueColor?: string
   gaugeStroke?: number
@@ -31,6 +32,7 @@ interface GaugeSVGProps {
 
 export const GaugeSVG: React.FC<GaugeSVGProps> = ({
   value,
+  fillColor,
   gaugeColor = '#ff0',
   gaugeValueColor = '#666',
   gaugeStroke = 2,
@@ -118,7 +120,7 @@ export const GaugeSVG: React.FC<GaugeSVGProps> = ({
     <Svg height={size} width={size} viewBox="0 0 100 100">
       <AnimatedPath
         strokeDasharray="50,0,20,0"
-        fill="none"
+        fill={fillColor}
         stroke={gaugeColorAnim}
         strokeWidth={gaugeStroke}
         d="M 21.716 78.284 A 40 40 0 1 1 78.284 78.284"

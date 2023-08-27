@@ -1,13 +1,13 @@
-import { createParam } from 'solito/build'
-import { useLink } from 'solito/link'
+import { createParam } from 'solito'
+import { useLink, useParams } from 'solito/navigation'
 import { Text, YStack } from '@corneflex/ui'
 import { ProductDetail } from './ProductDetail'
 import { useProduct } from './hooks/useProduct'
 
-const { useParam } = createParam<{ id: string }>()
+const useProductParams = useParams<{ id: string }>
 
 export const ProductDetailScreen = () => {
-  const [id] = useParam('id')
+  const {id} = useProductParams()
   const link = useLink({
     href: '/',
   })

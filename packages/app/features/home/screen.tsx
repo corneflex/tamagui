@@ -11,11 +11,11 @@ import {
 } from '@corneflex/ui'
 import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
-import { useLink } from 'solito/link'
+import { useLink } from 'solito/navigation'
 
 export function HomeScreen() {
   const linkProps = useLink({
-    href: '/products/',
+    href: '/products',
   })
 
   return (

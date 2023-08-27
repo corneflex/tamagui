@@ -26,6 +26,7 @@ export const NutrimentsGauges = ({
 }: NutrimentsGaugesProps) => {
   const theme = useTheme()
   const gaugeColor = theme.backgroundFocus.get()
+  const fillColor = theme.background.get()
 
   return (
     <XStack jc="center" {...props}>
@@ -35,6 +36,7 @@ export const NutrimentsGauges = ({
           range: [0, 8, 100],
           output: [B, A, A],
         }}
+        fillColor={fillColor}
         gaugeColor={gaugeColor}
         max={16}
         size={size}
@@ -45,6 +47,7 @@ export const NutrimentsGauges = ({
       <Gauge
         value={fat}
         size={size}
+        fillColor={fillColor}
         animatedValueColor={{
           range: [...generateParts(10), 100],
           output: [A, B, C, D, E, E],
@@ -58,6 +61,7 @@ export const NutrimentsGauges = ({
       <Gauge
         value={sugar}
         size={size}
+        fillColor={fillColor}
         animatedValueColor={{
           range: [...generateParts(45), 100],
           output: [A, B, C, D, E, E],

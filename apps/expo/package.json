@@ -12,7 +12,6 @@
   "dependencies": {
     "@babel/runtime": "^7.18.9",
     "@corneflex/ui": "0.0.1",
-    "@react-navigation/native": "^6.1.6",
     "@react-spring/native": "^9.7.3",
     "@tamagui/animations-moti": "^1.55.0",
     "app": "0.0.0",
@@ -25,7 +24,7 @@
     "expo-font": "~11.4.0",
     "expo-linking": "~5.0.2",
     "expo-localization": "^14.3.0",
-    "expo-router": "2.0.0",
+    "expo-router": "^2.0.2",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "expo-updates": "~0.18.11",

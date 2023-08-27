@@ -35,6 +35,10 @@
         "projectId": "60ebc00d-f63b-4ab8-8be0-52f97bdf6612"
       }
     },
-    "plugins": ["expo-build-properties", "expo-localization", "expo-router"]
+    "plugins": [
+      "expo-build-properties",
+      "expo-localization",
+      ["expo-router", { "origin": "https://corneflex.github.io" }]
+    ]
   }
 }

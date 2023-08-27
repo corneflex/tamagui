@@ -1,5 +1,5 @@
 import React from 'react';
-class Children {
+export class Children {
     static getSubComponents = (children, component) => {
         const subComponentList = Object.keys(component);
         const subComponents = {};
@@ -13,4 +13,3 @@ class Children {
         return subComponents;
     };
 }
-export { Children };

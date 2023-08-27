@@ -1,7 +1,7 @@
 import { Button, Text, YStack, Spinner } from 'tamagui'
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import React, { useState } from 'react'
-import { useLink } from 'solito/link'
+import { useLink } from 'solito/navigation'
 import { Products } from './Products'
 import { preloadProduct } from './hooks/useProduct'
 import { useProducts } from './hooks/useProducts'
