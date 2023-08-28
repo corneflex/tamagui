@@ -1,12 +1,11 @@
-import { Button, Text, YStack, Spinner } from 'tamagui'
-import { ChevronLeft } from '@tamagui/lucide-icons'
-import React, { useState } from 'react'
+import { Spinner, Text, YStack } from '@corneflex/ui'
+import debounce from 'lodash/debounce'
+import React from 'react'
 import { useLink } from 'solito/navigation'
+import { useEndOfScroll } from '../../hooks/ui/use-end-of-scroll/'
 import { Products } from './Products'
 import { preloadProduct } from './hooks/useProduct'
 import { useProducts } from './hooks/useProducts'
-import { useEndOfScroll } from '../../hooks/ui/use-end-of-scroll/'
-import debounce from 'lodash/debounce'
 
 export function ProductsScreen() {
   const link = useLink({
@@ -34,9 +33,6 @@ export function ProductsScreen() {
     <YStack f={1} jc="center" ai="center" space>
       <Products products={products} preload={(product) => preloadProduct(product.id)}></Products>
       {isValidating && <Spinner size="large"></Spinner>}
-      <Button {...link} icon={ChevronLeft}>
-        Go Home
-      </Button>
     </YStack>
   )
 }

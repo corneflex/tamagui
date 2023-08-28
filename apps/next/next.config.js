@@ -75,6 +75,7 @@ module.exports = function () {
       'expo-localization',
       'react-native-svg-web',
       '@react-spring/web',
+      'recyclerlistview/web',
     ],
     experimental: {
       /*
@@ -99,6 +100,7 @@ module.exports = function () {
       config.resolve.alias = {
         ...config.resolve.alias,
         'react-native-svg': 'react-native-svg-web',
+        recyclerlistview: 'recyclerlistview/web',
       }
       console.log(config.resolve.alias)
       return config

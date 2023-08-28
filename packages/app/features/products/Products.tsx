@@ -1,11 +1,11 @@
 'use client'
 import { Stack } from '@corneflex/ui'
-import { useColumns } from 'app/hooks/system/use-columns'
 import { Product } from 'app/model/Product'
-import { FlatList } from 'react-native'
+import { useEffect, useState } from 'react'
+import LayoutProvider from './LayoutProvider'
 import { ProductCard } from './ProductCard'
-import LazyLoad from 'react-lazyload'
-import { useState } from 'react'
+
+import { DataProvider, RecyclerListView } from 'recyclerlistview'
 
 export interface ProductProps {
   products?: Product[]
@@ -22,35 +22,37 @@ export const Products: React.FC<ProductProps> = ({
   onEndReached,
   onEndReachedThreshold,
 }) => {
-  const columns = useColumns(350)
+  const [dataProvider, setDataProvider] = useState(
+    new DataProvider((r1, r2) => {
+      return r1 !== r2
+    }).cloneWithRows(products || [])
+  )
+
+  useEffect(() => {
+    setDataProvider(dataProvider.cloneWithRows(products || []))
+  }, [products])
+
+  const _layoutProvider = new LayoutProvider(dataProvider)
+
+  const _renderRow = (type, data) => {
+    return (
+      <Stack f={1} m="$3">
+        <ProductCard f={1} height={200} width="100%" href={`/products/${data.id}`} product={data} />
+      </Stack>
+    )
+  }
+  _layoutProvider.shouldRefreshWithAnchoring = false
 
   return (
-    <Stack flex={1} width="100%" ai="center" jc={'center'} maxWidth={1400}>
-      {columns > 0 ? (
-        <FlatList
-          data={products}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item: product }) => (
-            <Stack margin="$2" onHoverIn={() => preload(product)}>
-              <LazyLoad height={CARD_HEIGHT} once>
-                <ProductCard
-                  height={CARD_HEIGHT}
-                  href={`/products/${product.id}`}
-                  product={product}
-                />
-              </LazyLoad>
-            </Stack>
-          )}
-          contentContainerStyle={{
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          numColumns={columns}
-          key={columns}
-          onEndReached={onEndReached}
-          onEndReachedThreshold={onEndReachedThreshold}
-        />
-      ) : null}
+    <Stack f={1} ai="center" jc="center">
+      <RecyclerListView
+        style={{ flex: 1 }}
+        layoutProvider={_layoutProvider}
+        dataProvider={dataProvider}
+        rowRenderer={_renderRow}
+        canChangeSize={true}
+        useWindowScroll={true}
+      />
     </Stack>
   )
 }
