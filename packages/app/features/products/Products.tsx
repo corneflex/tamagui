@@ -14,6 +14,8 @@ export interface ProductProps {
   onEndReachedThreshold?: number
 }
 
+export const CARD_HEIGHT = 200
+
 export const Products: React.FC<ProductProps> = ({
   products,
   preload = () => {},
@@ -21,7 +23,6 @@ export const Products: React.FC<ProductProps> = ({
   onEndReachedThreshold,
 }) => {
   const columns = useColumns(350)
-  const [isLoadingMore, setIsLoadingMore] = useState(false)
 
   return (
     <Stack flex={1} width="100%" ai="center" jc={'center'} maxWidth={1400}>
@@ -31,8 +32,12 @@ export const Products: React.FC<ProductProps> = ({
           keyExtractor={(item) => item.id}
           renderItem={({ item: product }) => (
             <Stack margin="$2" onHoverIn={() => preload(product)}>
-              <LazyLoad height={300} once>
-                <ProductCard href={`/products/${product.id}`} product={product} />
+              <LazyLoad height={CARD_HEIGHT} once>
+                <ProductCard
+                  height={CARD_HEIGHT}
+                  href={`/products/${product.id}`}
+                  product={product}
+                />
               </LazyLoad>
             </Stack>
           )}

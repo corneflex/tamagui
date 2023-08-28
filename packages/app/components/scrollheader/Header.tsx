@@ -1,9 +1,13 @@
 import { Children } from '@corneflex/compose-core'
 import { StackProps, XStack, XStackProps, YStack, YStackProps } from '@corneflex/ui'
-import React from 'react'
+import React, { cloneElement } from 'react'
 import { Animated } from 'react-native'
 
 const TOP_BAR_HEIGHT = 50
+type ScrollProps<T> = T & { scrollOffset?: Animated.Value; headerHeight?: number }
+
+const AnimatedYStack = Animated.createAnimatedComponent(YStack)
+const AnimatedXStack = Animated.createAnimatedComponent(XStack)
 
 export interface HeaderProps extends StackProps {
   height?: number
@@ -19,7 +23,7 @@ export const Header: React.FC<HeaderProps> & HeaderComponents = ({
   children,
   ...props
 }) => {
-  const headerSub = Children.getSubComponents<HeaderComponents>(children, Header)
+  const headerSub = Children.getSubComponents(children, Header)
 
   const bannerHeight = height + topBarHeight
 
@@ -35,49 +39,51 @@ export const Header: React.FC<HeaderProps> & HeaderComponents = ({
     extrapolate: 'clamp',
   })
 
-  const headerOpacity = scrollOffset.interpolate({
-    inputRange: [0, height],
-    outputRange: [1, 0],
-    extrapolate: 'clamp',
-  })
-
-  const AnimatedYStack = Animated.createAnimatedComponent(YStack)
-  const AnimatedXStack = Animated.createAnimatedComponent(XStack)
-
   return (
     <AnimatedYStack
       f={1}
-      zIndex={1}
       {...props}
       backgroundColor={'$background'}
       style={[{ top, transform: [{ scale }] }]}
       height={bannerHeight}
     >
-      <AnimatedXStack f={1} ai="center" style={[{ opacity: headerOpacity }]}>
-        {headerSub.Content}
-      </AnimatedXStack>
-      <YStack height={topBarHeight}>{headerSub.Title}</YStack>
+      {cloneElement(headerSub.Content, { scrollOffset, headerHeight: height })}
+      <YStack height={topBarHeight}>{headerSub.TopBar}</YStack>
     </AnimatedYStack>
   )
 }
 
-const Title: React.FC<XStackProps> = ({ children, ...props }) => (
+const TopBar: React.FC<XStackProps> = ({ children, ...props }) => (
   <XStack ai="center" width={'100%'} {...props}>
     {children}
   </XStack>
 )
 
-Header.Title = Title
+Header.TopBar = TopBar
 
-const Content: React.FC<YStackProps> = ({ children, ...props }) => (
-  <YStack f={1} ai="center" jc={'center'} {...props}>
-    {children}
-  </YStack>
-)
+const Content: React.FC<ScrollProps<YStackProps>> = ({
+  scrollOffset,
+  headerHeight: height,
+  children,
+  style,
+  ...props
+}) => {
+  const headerOpacity = scrollOffset?.interpolate({
+    inputRange: [0, height ?? 0],
+    outputRange: [1, 0],
+    extrapolate: 'clamp',
+  })
+
+  return (
+    <AnimatedYStack f={1} ai="center" style={[style, { opacity: headerOpacity }]} {...props}>
+      {children}
+    </AnimatedYStack>
+  )
+}
 
 Header.Content = Content
 
 type HeaderComponents = {
-  Title: typeof Title
+  TopBar: typeof TopBar
   Content: typeof Content
 }

@@ -7,7 +7,7 @@ import { getFields, productMapper } from '../product.mapper'
 const getKey = (pageIndex, previousPageData) => {
   const locale = getLocales()?.[0]?.languageCode ?? ''
   if (previousPageData && !previousPageData.length) return null // reached the end
-  return `/search?page=${pageIndex + 1}&fields=${getFields(locale)}` // SWR key
+  return `/search?page=${pageIndex + 1}&page_size=50&fields=${getFields(locale)}` // SWR key
 }
 
 export const useProducts = (): SWRInfiniteResponse<Product> => {

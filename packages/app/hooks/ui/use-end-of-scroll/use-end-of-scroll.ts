@@ -6,7 +6,7 @@ export const useEndOfScroll = (callback) => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
       const windowHeight = window.innerHeight
-      const fullDocumentHeight = document.documentElement.offsetHeight
+      const fullDocumentHeight = document.body.offsetHeight
 
       if (scrollTop + windowHeight >= fullDocumentHeight) {
         callback()

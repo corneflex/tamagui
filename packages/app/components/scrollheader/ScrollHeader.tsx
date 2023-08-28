@@ -19,7 +19,7 @@ export const ScrollHeader: React.FC<ScrollHeaderProps> & ScrollHeaderComponents 
   ...props
 }) => {
   const [animatedScrollIndex] = useState(new Value(0))
-  const scrollComponents = Children.getSubComponents<ScrollHeaderComponents>(children, ScrollHeader)
+  const scrollComponents = Children.getSubComponents(children, ScrollHeader)
   return (
     <Stack f={1}>
       <Header

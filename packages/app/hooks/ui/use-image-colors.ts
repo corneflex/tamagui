@@ -1,6 +1,14 @@
 import React from 'react'
 import { getColors } from 'react-native-image-colors'
 
+type ImageColors = {
+  lightVibrant: string
+  dominant: string
+  vibrant: string
+  darkVibrant: string
+  rawResult: string
+}
+
 function mapColors(colors, setColors) {
   switch (colors.platform) {
     case 'android':
@@ -27,8 +35,8 @@ function mapColors(colors, setColors) {
   }
 }
 
-export const useImageColors = (url): any => {
-  const [colors, setColors] = React.useState(null)
+export const useImageColors = (url): ImageColors => {
+  const [colors, setColors] = React.useState<ImageColors>({lightVibrant:"#ffffff",dominant:"#ffffff",vibrant:"#ffffff",darkVibrant:"#ffffff",rawResult:""})
 
   React.useEffect(() => {
     if (url)

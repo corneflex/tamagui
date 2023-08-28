@@ -22,7 +22,7 @@ export const ScrollHeader: React.FC<ScrollHeaderProps> & ScrollHeaderComponents 
       scrollOffset.value = event.contentOffset.y
     },
   })
-  const scrollComponents = Children.getSubComponents<ScrollHeaderComponents>(children, ScrollHeader)
+  const scrollComponents = Children.getSubComponents(children, ScrollHeader)
   return (
     <Stack f={1}>
       <Header

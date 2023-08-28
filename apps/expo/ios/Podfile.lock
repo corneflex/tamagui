@@ -80,6 +80,8 @@ PODS:
     - ExpoModulesCore
   - ExpoKeepAwake (12.3.0):
     - ExpoModulesCore
+  - ExpoLinearGradient (12.4.0):
+    - ExpoModulesCore
   - ExpoLocalization (14.4.0):
     - ExpoModulesCore
   - ExpoModulesCore (1.5.10):
@@ -596,6 +598,7 @@ DEPENDENCIES:
   - expo-dev-menu-interface (from `../../../node_modules/expo-dev-menu-interface/ios`)
   - ExpoHead (from `../../../node_modules/expo-head/ios`)
   - ExpoKeepAwake (from `../../../node_modules/expo-keep-awake/ios`)
+  - ExpoLinearGradient (from `../../../node_modules/expo-linear-gradient/ios`)
   - ExpoLocalization (from `../../../node_modules/expo-localization/ios`)
   - ExpoModulesCore (from `../../../node_modules/expo-modules-core`)
   - EXSplashScreen (from `../../../node_modules/expo-splash-screen/ios`)
@@ -693,6 +696,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/expo-head/ios"
   ExpoKeepAwake:
     :path: "../../../node_modules/expo-keep-awake/ios"
+  ExpoLinearGradient:
+    :path: "../../../node_modules/expo-linear-gradient/ios"
   ExpoLocalization:
     :path: "../../../node_modules/expo-localization/ios"
   ExpoModulesCore:
@@ -812,6 +817,7 @@ SPEC CHECKSUMS:
   expo-dev-menu-interface: bda969497e73dadc2663c479e0fa726ca79a306e
   ExpoHead: 8da645502363b53eeb99d99276a0adbe0ec8cff0
   ExpoKeepAwake: be4cbd52d9b177cde0fd66daa1913afa3161fc1d
+  ExpoLinearGradient: 8c0682786fae72eef01bca6cfd90392ae79b0750
   ExpoLocalization: f18241f3e0d510b746151631bbcd3b42b6e51b7e
   ExpoModulesCore: e5a168deba84f74c0e558befa31dbaea06c00af0
   EXSplashScreen: c0e7f2d4a640f3b875808ed0b88575538daf6d82
