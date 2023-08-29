@@ -1,6 +1,6 @@
 'use client'
 import Head from 'next/head'
-import { ProductDetailScreen } from 'app/features/products/ProductDetailScreen'
+import { ProductDetailScreen } from 'app/features/productDetail'
 export function ProductDetail() {
   return (
     <>

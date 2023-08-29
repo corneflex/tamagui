@@ -1,5 +1,5 @@
 'use client'
-import { ProductsScreen } from 'app/features/products/ProductsScreen'
+import { ProductsScreen } from 'app/features/products'
 import Head from 'next/head'
 
 export function Producs() {

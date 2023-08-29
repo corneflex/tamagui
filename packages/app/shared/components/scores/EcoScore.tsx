@@ -1,4 +1,4 @@
-import { EcoScoreType } from 'app/model/Product'
+import { EcoScoreType } from 'app/models/Product'
 import { Images } from '../../../images'
 
 export interface EcoScoreProps {

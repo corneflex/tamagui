@@ -1,13 +1,13 @@
 import { H3, Image, Stack } from '@corneflex/ui'
-import { LinearGradient } from '@tamagui/linear-gradient'
 import { useState } from 'react'
 import { StyleSheet, useColorScheme } from 'react-native'
-import { ScrollHeader } from '../../../components/scrollheader'
-import { Header } from '../../../components/scrollheader/Header'
+import { LinearGradient } from 'tamagui/linear-gradient'
 import { useImageColors } from '../../../hooks/ui/use-image-colors'
-import { Product } from '../../../model/Product'
-import { NutrimentsGauges } from '../NutrimentGauges/NutrimentsGauges'
-import { NutriScore } from '../scores/NutriScore'
+import { Product } from '../../../models/Product'
+import { NutriScore } from '../../../shared/components/scores/NutriScore'
+import { ScrollHeader } from '../../../shared/components/scrollheader'
+import { Header } from '../../../shared/components/scrollheader/Header'
+import { NutrimentsGauges } from './NutrimentsGauges'
 export interface ProductDetailProps {
   product?: Product
 }
@@ -15,6 +15,8 @@ export interface ProductDetailProps {
 export const ProductDetail = ({ product }: ProductDetailProps) => {
   const [on, setOn] = useState(false)
   const colors = useImageColors(product?.image.small.url)
+
+  console.log('colors', colors)
 
   if (!product) return null
 
@@ -25,6 +27,13 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
   const MARGIN_TOP = 20
   const bannerHeight = MARGIN_TOP + imageHeight + gaugeSize
   const colorScheme = useColorScheme()
+  const nutriColors = {
+    a: '$NutriA',
+    b: '$NutriB',
+    c: '$NutriC',
+    d: '$NutriD',
+    e: '$NutriE',
+  }
 
   return (
     <ScrollHeader
@@ -42,11 +51,9 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       </Header.TopBar>
       <Header.Content jc="flex-end">
         <LinearGradient
+          locations={[0, 0.9]}
           style={StyleSheet.absoluteFill}
-          colors={[
-            colorScheme === 'dark' ? colors.darkVibrant : colors.lightVibrant,
-            '$background',
-          ]}
+          colors={['$backgroundStrong', '$background']}
         />
         <Image
           resizeMode="contain"
@@ -57,9 +64,9 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
             width: imageWidth,
             height: imageHeight,
           }}
+          b={-20}
         ></Image>
         <NutrimentsGauges
-          p={5}
           borderRadius={10}
           size={gaugeSize}
           overflow="hidden"

@@ -1,4 +1,4 @@
-import { ProductsScreen } from 'app/features/products/ProductsScreen'
+import { ProductsScreen } from 'app/features/products'
 import { Stack } from 'expo-router'
 import Head from 'expo-router/head'
 

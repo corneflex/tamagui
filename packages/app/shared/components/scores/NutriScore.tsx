@@ -1,4 +1,4 @@
-import { NutriScoreType } from 'app/model/Product'
+import { NutriScoreType } from 'app/models/Product'
 import { Images } from '../../../images'
 
 export interface NutriScoreProps {

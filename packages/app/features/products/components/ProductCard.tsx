@@ -1,8 +1,8 @@
 import { Card, H3, Image, Paragraph, Stack, Text, XStack, YStack } from '@corneflex/ui'
-import { Product } from 'app/model/Product'
+import { Product } from 'app/models/Product'
 import React from 'react'
 import { Link } from 'solito/link'
-import { EcoScore, NovaGroup, NutriScore } from './scores'
+import { EcoScore, NovaGroup, NutriScore } from '../../../shared/components/scores'
 
 export interface ProductCardProps {
   width?: string | number
@@ -12,13 +12,7 @@ export interface ProductCardProps {
   onClick?: () => void
 }
 
-export const ProductCard: React.FC<any> = ({
-  width = 350,
-  height = 200,
-  product,
-  href,
-  ...props
-}) => {
+export const ProductCard: React.FC<any> = ({ width, height, product, href, ...props }) => {
   // const colors = useImageColors(product?.selected_images?.front.display.fr)
   const thumb = product?.image?.thumb
   const imageWidth = thumb?.width ?? 200
@@ -26,8 +20,9 @@ export const ProductCard: React.FC<any> = ({
 
   if (!product) return null
   return (
-    <Link href={href}>
+    <Link href={href} viewProps={{ style: { width, height, flex: 1 } }}>
       <Card
+        f={1}
         elevate
         size="$2"
         bordered

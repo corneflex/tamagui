@@ -1,21 +1,20 @@
-import { XStack, useTheme } from '@corneflex/ui'
-import { StackProps } from '@tamagui/core'
-import { NutriColors } from 'app/colors/nutriscore'
-import { GaugeSVG as Gauge } from '../../../components/gauge/Gauge'
+import { XStack, XStackProps, useTheme } from '@corneflex/ui'
+import { GaugeSVG as Gauge } from '../../../shared/components/gauge/Gauge'
 
 function generateParts(value, part = 5) {
   const step = value / part
   return Array.from({ length: part }, (_, i) => Math.round(i * step))
 }
 
-export interface NutrimentsGaugesProps extends StackProps {
+export interface NutrimentsGaugesProps extends XStackProps {
   protein?: number
   fat?: number
   sugar?: number
   size?: number
 }
 
-const { A, B, C, D, E } = NutriColors
+const nutriScoreColors = { A: '#26803D', B: '#87BD25', C: '#F6CC03', D: '#EF7D01', E: '#E63313' }
+const { A, B, C, D, E } = nutriScoreColors
 
 export const NutrimentsGauges = ({
   protein = 0,
@@ -27,6 +26,8 @@ export const NutrimentsGauges = ({
   const theme = useTheme()
   const gaugeColor = theme.backgroundFocus.get()
   const fillColor = theme.background.get()
+  const red = theme.red9.get()
+  const green = theme.green9.get()
 
   return (
     <XStack jc="center" {...props}>
@@ -42,7 +43,7 @@ export const NutrimentsGauges = ({
         size={size}
         text="Protein"
         maxText="16g"
-        maxTextColor={theme.green9.get()}
+        maxTextColor={green}
       ></Gauge>
       <Gauge
         value={fat}
@@ -56,7 +57,7 @@ export const NutrimentsGauges = ({
         max={10}
         text="Fat"
         maxText="10g"
-        maxTextColor={theme.red9.get()}
+        maxTextColor={red}
       ></Gauge>
       <Gauge
         value={sugar}
@@ -70,7 +71,7 @@ export const NutrimentsGauges = ({
         max={45}
         text="Sugar"
         maxText="45g"
-        maxTextColor={theme.red9.get()}
+        maxTextColor={red}
       ></Gauge>
     </XStack>
   )

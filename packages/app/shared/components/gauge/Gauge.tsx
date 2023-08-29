@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { useSpring, animated, InterpolatorArgs, InterpolatorConfig } from '../react-spring'
-import Svg, { Path, Text, Line } from 'react-native-svg'
+import Svg, { Path, Text } from 'react-native-svg'
+import { InterpolatorConfig, animated, useSpring } from '../react-spring'
 
 type validateValueType = (v: number, min?: number, max?: number) => number
 

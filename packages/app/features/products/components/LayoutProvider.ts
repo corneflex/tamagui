@@ -3,9 +3,9 @@ import { Dimensions } from 'react-native'
 
 const MAX_SPAN = 4
 export default class LayoutProvider extends GridLayoutProvider {
-  constructor(props) {
+  constructor(props, columns, width, height) {
     super(
-      Math.floor(Dimensions.get('screen').width / 330),
+      columns,
       (index) => {
         return 'product'
       },
@@ -13,7 +13,7 @@ export default class LayoutProvider extends GridLayoutProvider {
         return 1
       },
       (index) => {
-        return 230
+        return height
       }
     )
   }

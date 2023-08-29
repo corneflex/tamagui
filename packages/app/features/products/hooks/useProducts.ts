@@ -1,5 +1,5 @@
 import { openFoodFetcher } from 'app/api/api'
-import { Product } from 'app/model/Product'
+import { Product } from 'app/models/Product'
 import { getLocales } from 'expo-localization'
 import useSWRInfinite, { SWRInfiniteResponse } from 'swr/infinite'
 import { getFields, productMapper } from '../product.mapper'

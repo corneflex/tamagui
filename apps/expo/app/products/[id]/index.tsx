@@ -1,4 +1,4 @@
-import { ProductDetailScreen } from 'app/features/products/ProductDetailScreen'
+import { ProductDetailScreen } from 'app/features/productDetail'
 import { Stack } from 'expo-router'
 export default function Page() {
   return (

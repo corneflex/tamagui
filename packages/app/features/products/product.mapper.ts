@@ -1,4 +1,4 @@
-import { Product } from 'app/model/Product'
+import { Product } from 'app/models/Product'
 import get from 'lodash.get'
 
 export const mapping = {

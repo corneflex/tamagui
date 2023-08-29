@@ -14,7 +14,7 @@
     "@corneflex/ui": "0.0.1",
     "@react-spring/native": "^9.7.3",
     "@tamagui/animations-moti": "^1.55.0",
-    "@tamagui/linear-gradient": "^1.57.3",
+    "@tamagui/linear-gradient": "^1.57.4",
     "app": "0.0.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "burnt": "^0.10.0",
@@ -37,7 +37,8 @@
     "react-native-reanimated": "3.4.1",
     "react-native-safe-area-context": "4.6.3",
     "react-native-screens": "~3.22.0",
-    "react-native-svg": "13.4.0"
+    "react-native-svg": "13.4.0",
+    "recyclerlistview": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

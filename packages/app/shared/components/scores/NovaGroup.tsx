@@ -1,4 +1,4 @@
-import { NovaGroupType } from 'app/model/Product'
+import { NovaGroupType } from 'app/models/Product'
 import { Images } from '../../../images'
 
 export interface NovaGroupProps {

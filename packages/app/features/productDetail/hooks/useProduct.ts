@@ -1,9 +1,14 @@
 import { openFoodFetcher } from 'app/api/api'
-import { Product } from 'app/model/Product'
+import { Product } from 'app/models/Product'
 import { getLocales } from 'expo-localization'
 import useSWR, { preload } from 'swr'
-import { getFields, productMapper } from '../product.mapper'
-import { Loading } from './loading.interface'
+import { productMapper } from '../../products/product.mapper'
+
+export interface Loading<T> {
+  data: T
+  isLoading: boolean
+  error: any
+}
 
 const constructUrl = (id, locale) => `/product/${id}`
 
