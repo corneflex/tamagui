@@ -1,12 +1,12 @@
-import { Button, Text, YStack, Spinner } from 'tamagui'
 import { ChevronLeft } from '@tamagui/lucide-icons'
-import React, { useState } from 'react'
+import debounce from 'lodash/debounce'
+import React from 'react'
 import { useLink } from 'solito/navigation'
-import { Products } from './Products'
+import { Button, Spinner, Text, YStack } from 'tamagui'
+import { useEndOfScroll } from '../../../hooks/ui/use-end-of-scroll/'
 import { preloadProduct } from '../../productDetail/hooks/useProduct'
 import { useProducts } from '../hooks/useProducts'
-import { useEndOfScroll } from '../../../hooks/ui/use-end-of-scroll/'
-import debounce from 'lodash/debounce'
+import { Products } from './Products'
 
 export function ProductsScreen() {
   const link = useLink({

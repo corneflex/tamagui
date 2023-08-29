@@ -7,6 +7,7 @@ import { ProductCard } from './ProductCard'
 
 import { useColumns } from 'app/hooks/system/use-columns'
 import { DataProvider, RecyclerListView } from 'recyclerlistview'
+import { Link } from 'solito/link'
 
 export interface ProductProps {
   products?: Product[]
@@ -35,12 +36,14 @@ export const Products: React.FC<ProductProps> = ({
 
   const columns = useColumns(330)
 
-  const _layoutProvider = new LayoutProvider(dataProvider, columns, 300, 200)
+  const _layoutProvider = new LayoutProvider(dataProvider, columns, 300, 250)
 
   const _renderRow = (type, data) => {
     return (
       <Stack f={1} ai="center" padding="$3">
-        <ProductCard width="100%" height="100%" href={`/products/${data.id}`} product={data} />
+        <Link href={`/products/${data.id}`} viewProps={{ style: { width:'100%', height:'100%', flex: 1 } }}>
+        <ProductCard width="100%" height="100%" product={data} />
+        </Link>
       </Stack>
     )
   }
