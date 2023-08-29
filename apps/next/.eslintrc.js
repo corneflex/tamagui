@@ -1,4 +1,4 @@
 module.exports = {
-  extends: 'next',
+  extends: ['next', 'plugin:storybook/recommended'],
   root: true,
 }
