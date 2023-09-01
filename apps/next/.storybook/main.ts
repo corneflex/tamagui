@@ -1,4 +1,5 @@
 import { join, dirname } from 'path'
+import svgr from 'vite-plugin-svgr'
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -23,12 +24,20 @@ const config = {
   viteFinal: async (config, { configType }) => {
     const { tamaguiPlugin } = require('@tamagui/vite-plugin')
 
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'react-native-svg': 'react-native-svg-web',
+      recyclerlistview: 'recyclerlistview/web',
+    }
+
     config.plugins.push(
       tamaguiPlugin({
         config: '../tamagui.config.ts',
         components: ['tamagui'],
       })
     )
+
+    config.plugins.push(svgr())
 
     return config
   },
