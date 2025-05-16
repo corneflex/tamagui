@@ -1,95 +1,67 @@
-# Tamagui + Solito + Next + Expo Monorepo
+# 🛒 Supermarché Product Explorer
+
+Ce projet est une application web et mobile (Next.js + Expo) permettant de lister et explorer des articles de supermarché (produits alimentaires) à partir de l'API publique [OpenFoodFacts](https://world.openfoodfacts.org/api/v2).
+
+## Fonctionnalités principales
+
+- **Liste de produits** : Affichage performant (grille virtuelle) de produits alimentaires issus de l'API OpenFoodFacts.
+- **Scroll infini** : Chargement automatique de nouveaux produits lors du scroll.
+- **Navigation** : Accès à la fiche détaillée de chaque produit.
+- **UI cross-platform** : Interface unifiée web/mobile grâce à Tamagui.
+
+## Stack technique
+
+- **Next.js** (web)
+- **Expo** (mobile)
+- **Tamagui** (UI cross-platform)
+- **SWR** (fetching, cache, pagination)
+- **RecyclerListView** (grille performante)
+- **OpenFoodFacts API** (source des données)
+
+## Tamagui & Solito : cross-platform natif
+
+- **Tamagui** est une librairie UI React qui permet d'écrire des composants réutilisables et performants, avec un rendu natif sur web **et** mobile (React Native). Elle gère le style, la responsivité, et l'accessibilité de façon unifiée.
+- **Solito** permet de partager la navigation et la logique de routing entre Next.js (web) et React Navigation (mobile), en gardant une API commune. On écrit une seule fois la navigation (liens, routes, navigation stack) et elle fonctionne sur toutes les plateformes.
+- **Approche cross-platform** :
+  - Les écrans, composants et hooks sont partagés entre web et mobile.
+  - La navigation (liens, navigation stack, deep linking) est abstraite : un `<Link>` ou un `useLink` fonctionne aussi bien sur Next.js (web) que sur Expo (mobile), sans code spécifique à chaque plateforme.
+  - Résultat : une base de code unique, une UX cohérente, et un vrai partage de logique métier et UI.
+
+## Structure du monorepo
+
+- `apps/next` : Application web (Next.js)
+- `apps/expo` : Application mobile (Expo)
+- `packages/app` : Logique métier, hooks, features partagés
+- `packages/ui` : UI kit custom optimisé Tamagui
+
+## Démarrage rapide
 
 ```sh
-npm create tamagui
+yarn # installe les dépendances
+
+yarn web # démarre l'app web (Next.js)
+
+yarn native # démarre l'app mobile (Expo)
 ```
 
-## 🔦 About
+## Exemple d'API utilisée
 
-This monorepo is a starter for an Expo + Next.js + Tamagui + Solito app.
+Les produits sont récupérés via l'API publique OpenFoodFacts :
 
-Many thanks to [@FernandoTheRojo](https://twitter.com/fernandotherojo) for the Solito starter monorepo which this was forked from. Check out his [talk about using expo + next together at Next.js Conf 2021](https://www.youtube.com/watch?v=0lnbdRweJtA).
-
-## 📦 Included packages
-
-- [Tamagui](https://tamagui.dev) 🪄
-- [solito](https://solito.dev) for cross-platform navigation
-- Expo SDK
-- Next.js
-- Expo Router
-
-## 🗂 Folder layout
-
-The main apps are:
-
-- `expo` (native)
-- `next` (web)
-
-- `packages` shared packages across apps
-  - `ui` includes your custom UI kit that will be optimized by Tamagui
-  - `app` you'll be importing most files from `app/`
-    - `features` (don't use a `screens` folder. organize by feature.)
-    - `provider` (all the providers that wrap the app, and some no-ops for Web.)
-
-You can add other folders inside of `packages/` if you know what you're doing and have a good reason to.
-
-## 🏁 Start the app
-
-- Install dependencies: `yarn`
-
-- Next.js local dev: `yarn web`
-
-To run with optimizer on in dev mode (just for testing, it's faster to leave it off): `yarn web:extract`. To build for production `yarn web:prod`.
-
-To see debug output to verify the compiler, add `// debug` as a comment to the top of any file.
-
-- Expo local dev: `yarn native`
-
-## UI Kit
-
-Note we're following the [design systems guide](https://tamagui.dev/docs/guides/design-systems) and creating our own package for components.
-
-See `packages/ui` named `@corneflex/ui` for how this works.
-
-## 🆕 Add new dependencies
-
-### Pure JS dependencies
-
-If you're installing a JavaScript-only dependency that will be used across platforms, install it in `packages/app`:
-
-```sh
-cd packages/app
-yarn add date-fns
-cd ../..
-yarn
+```
+GET https://world.openfoodfacts.org/api/v2/search?page=1&page_size=50&fields=product_name,brands,images
 ```
 
-### Native dependencies
+## Pour contribuer
 
-If you're installing a library with any native code, you must install it in `expo`:
+- Ajoute tes features dans `packages/app/features`.
+- Les composants UI partagés vont dans `packages/ui`.
+- Les hooks d'accès API sont dans `packages/app/features/products/hooks`.
 
-```sh
-cd apps/expo
-yarn add react-native-reanimated
-cd ..
-yarn
-```
+## À propos
 
-## Update new dependencies
+Ce projet est basé sur le starter Tamagui/Solito, mais va plus loin : il propose une vraie exploration de produits alimentaires, avec une stack moderne et une UX fluide.
 
-### Pure JS dependencies
+---
 
-```sh
-yarn upgrade-interactive
-```
-
-You can also install the native library inside of `packages/app` if you want to get autoimport for that package inside of the `app` folder. However, you need to be careful and install the _exact_ same version in both packages. If the versions mismatch at all, you'll potentially get terrible bugs. This is a classic monorepo issue. I use `lerna-update-wizard` to help with this (you don't need to use Lerna to use that lib).
-
-You may potentially want to have the native module transpiled for the next app. If you get error messages with `Cannot use import statement outside a module`, you may need to use `transpilePackages` in your `next.config.js` and add the module to the array there.
-
-### Deploying to Vercel
-
-- Root: `apps/next`
-- Install command to be `yarn set version berry && yarn install`
-- Build command: leave default setting
-- Output dir: leave default setting
+*Fork de l'architecture [Solito](https://solito.dev) adaptée à un cas d'usage concret.*
